@@ -128,19 +128,19 @@
             <span class="hud__label" data-i18n="hud.scoreLabel">スコア</span>
             <span class="hud__value" id="hud-score">0000</span>
           </div>
+          <div class="hud__item hud__item--timer" id="hud-timer-item">
+            <span class="hud__label" data-i18n="hud.timeLabel">残り時間</span>
+            <span class="hud__value hud__value--time" id="hud-time">60</span>
+          </div>
           <div class="hud__item">
             <span class="hud__label" data-i18n="hud.successLabel">成功回数</span>
             <span class="hud__value" id="hud-success">0</span>
-          </div>
-          <div class="hud__item">
-            <span class="hud__label" data-i18n="hud.timeLabel">残り時間</span>
-            <span class="hud__value" id="hud-time">60</span>
           </div>
         </section>
 
         <section class="stage">
           <div class="stage__target">
-            <h2 data-i18n="target.title">お題カラー</h2>
+            <h2 data-i18n="target.title">TARGET COLOR</h2>
             <div class="color-card" id="target-color">
               <div class="color-card__swatch"></div>
               <p class="color-card__name">RED</p>
@@ -154,7 +154,6 @@
           <div class="stage__penlight">
             <button class="rotate-button rotate-button--left" id="btn-right">
               <span>◀︎</span>
-              <small data-i18n="controls.turnRight">順回し</small>
             </button>
             <div class="penlight" id="penlight">
               <div class="penlight__tube"></div>
@@ -166,7 +165,6 @@
             </div>
             <button class="rotate-button rotate-button--right" id="btn-left">
               <span>▶︎</span>
-              <small data-i18n="controls.turnLeft">逆回し</small>
             </button>
             <p class="penlight__label" id="penlight-label" data-i18n="penlight.off">
               OFF
@@ -179,7 +177,14 @@
               id="btn-end"
               data-i18n="play.showResult"
             >
-              結果を見る
+              終了する
+            </button>
+            <button
+              class="cta-button cta-button--outline"
+              id="btn-pause"
+              data-i18n="play.pause"
+            >
+              中断する
             </button>
           </div>
         </section>

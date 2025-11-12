@@ -153,10 +153,12 @@ const translations = {
     "hud.scoreLabel": "スコア",
     "hud.successLabel": "成功回数",
     "hud.timeLabel": "残り時間",
-    "target.title": "お題カラー",
+    "target.title": "TARGET COLOR",
     "controls.turnLeft": "逆回し",
     "controls.turnRight": "順回し",
-    "play.showResult": "結果を見る",
+    "play.showResult": "終了する",
+    "play.pause": "中断する",
+    "play.resume": "再開する",
     "play.retry": "もう一度プレイ",
     "play.toTop": "トップに戻る",
     "fever.title": "フィーバータイム！",
@@ -206,10 +208,12 @@ const translations = {
     "hud.scoreLabel": "Score",
     "hud.successLabel": "Matches",
     "hud.timeLabel": "Time Left",
-    "target.title": "Target Color",
+    "target.title": "TARGET COLOR",
     "controls.turnLeft": "Spin Left",
     "controls.turnRight": "Spin Right",
-    "play.showResult": "Show Results",
+    "play.showResult": "Exit",
+    "play.pause": "Pause",
+    "play.resume": "Resume",
     "play.retry": "Play Again",
     "play.toTop": "Back to Top",
     "fever.title": "Fever Time!",
@@ -259,10 +263,12 @@ const translations = {
     "hud.scoreLabel": "스코어",
     "hud.successLabel": "성공 횟수",
     "hud.timeLabel": "남은 시간",
-    "target.title": "목표 색상",
+    "target.title": "TARGET COLOR",
     "controls.turnLeft": "왼쪽 회전",
     "controls.turnRight": "오른쪽 회전",
-    "play.showResult": "결과 보기",
+    "play.showResult": "종료하기",
+    "play.pause": "중단하기",
+    "play.resume": "재개하기",
     "play.retry": "다시 플레이",
     "play.toTop": "처음으로 돌아가기",
     "fever.title": "피버 타임!",
@@ -373,6 +379,7 @@ class GameStore {
       score: 0,
       successCount: 0,
       streak: 0,
+      paused: false,
       currentIndex: null,
       targetIndex: 0,
       responses: 0,
@@ -440,6 +447,7 @@ class GameStore {
       timeLeft: 60,
       currentIndex: null,
       targetIndex: this.randomTargetIndex(),
+      paused: false,
     }));
     this.startMainTimer();
   }
@@ -448,6 +456,7 @@ class GameStore {
     this.clearTimer("main");
     const tick = () => {
       this.update((state) => {
+        if (state.paused) return state;
         if (state.fever.active) return state;
         const nextTime = state.timeLeft - 1;
         if (nextTime <= 0) {
@@ -471,9 +480,41 @@ class GameStore {
     Object.keys(this.state.timers).forEach((key) => this.clearTimer(key));
   }
 
+  togglePause() {
+    if (this.state.paused) {
+      this.resume();
+    } else {
+      this.pause();
+    }
+  }
+
+  pause() {
+    if (this.state.paused) return;
+    this.clearTimers();
+    this.update((state) => ({
+      ...state,
+      paused: true,
+      timers: { ...state.timers, main: null, fever: null },
+    }));
+  }
+
+  resume() {
+    if (!this.state.paused) return;
+    this.update((state) => ({
+      ...state,
+      paused: false,
+    }));
+    if (this.state.fever.active) {
+      this.startFeverTimer();
+    } else if (this.state.timeLeft > 0) {
+      this.startMainTimer();
+    }
+  }
+
   rotate(direction) {
     let matched = false;
     this.update((state) => {
+      if (state.paused) return state;
       if (state.fever.active) return state;
 
       let workingState = state;
@@ -581,6 +622,7 @@ class GameStore {
     this.state.timers.fever = setInterval(() => {
       this.update((state) => {
         if (!state.fever.active) return state;
+        if (state.paused) return state;
         const nextTime = state.fever.timeLeft - 1;
         if (nextTime <= 0) {
           this.exitFever();
@@ -598,7 +640,7 @@ class GameStore {
   }
 
   swing(direction) {
-    if (!this.state.fever.active) return;
+    if (!this.state.fever.active || this.state.paused) return;
     this.update((state) => {
       const swingCount = state.fever.swingCount + 1;
       let { responseStage } = state.fever;
@@ -645,6 +687,11 @@ class GameStore {
 
   finish() {
     this.clearTimers();
+    this.update((state) => ({
+      ...state,
+      paused: false,
+      timers: { ...state.timers, main: null, fever: null },
+    }));
     screens.showResult(this.state);
     saveHistory(this.state);
   }
@@ -656,20 +703,49 @@ const screens = {
   top: document.getElementById("screen-top"),
   play: document.getElementById("screen-play"),
   result: document.getElementById("screen-result"),
+  langSwitcher: document.getElementById("lang-switcher"),
+  hero: document.querySelector(".hero"),
+  lockScroll() {
+    document.body.classList.add("scroll-lock");
+  },
+  unlockScroll() {
+    document.body.classList.remove("scroll-lock");
+  },
   showTop() {
+    this.unlockScroll();
     this.top.hidden = false;
     this.play.hidden = true;
     this.result.hidden = true;
+    if (this.langSwitcher) {
+      this.langSwitcher.hidden = false;
+    }
+    if (this.hero) {
+      this.hero.hidden = false;
+    }
   },
   showPlay() {
+    this.lockScroll();
     this.top.hidden = true;
     this.play.hidden = false;
     this.result.hidden = true;
+    if (this.langSwitcher) {
+      this.langSwitcher.hidden = true;
+    }
+    if (this.hero) {
+      this.hero.hidden = true;
+    }
   },
   showResult(state) {
+    this.unlockScroll();
     this.top.hidden = true;
     this.play.hidden = true;
     this.result.hidden = false;
+    if (this.langSwitcher) {
+      this.langSwitcher.hidden = false;
+    }
+    if (this.hero) {
+      this.hero.hidden = false;
+    }
     populateResult(state);
   },
 };
@@ -677,6 +753,7 @@ const screens = {
 const hudScore = document.getElementById("hud-score");
 const hudSuccess = document.getElementById("hud-success");
 const hudTime = document.getElementById("hud-time");
+const hudTimerItem = document.getElementById("hud-timer-item");
 const targetColor = document.getElementById("target-color");
 const penlight = document.getElementById("penlight");
 const penlightLabel = document.getElementById("penlight-label");
@@ -692,9 +769,12 @@ const resultScore = document.getElementById("result-score");
 const resultLevel = document.getElementById("result-level");
 const resultSuccess = document.getElementById("result-success");
 const resultResponses = document.getElementById("result-responses");
+const pauseButton = document.getElementById("btn-pause");
 
 let lastSwingDirection = null;
 let previewItems = [];
+let lastCountdownTime = null;
+let audioContext = null;
 
 function initUI() {
   const reversedColors = [...colors].reverse();
@@ -712,6 +792,20 @@ function updateUI(state) {
   hudScore.textContent = state.score.toString().padStart(4, "0");
   hudSuccess.textContent = state.successCount;
   hudTime.textContent = state.timeLeft;
+  updatePauseButtonLabel(state.paused);
+  const timeChanged = lastCountdownTime !== state.timeLeft;
+  updateCountdownEffects(state.timeLeft);
+  if (
+    timeChanged &&
+    Number.isFinite(state.timeLeft) &&
+    state.timeLeft <= 10 &&
+    state.timeLeft >= 0
+  ) {
+    playCountdownBeep(state.timeLeft);
+  }
+  if (timeChanged) {
+    lastCountdownTime = state.timeLeft;
+  }
 
   const tube = penlight.querySelector(".penlight__tube");
   if (state.currentIndex === null) {
@@ -741,10 +835,8 @@ function updateUI(state) {
         0.55
       )}`;
     }
-    const luminance = getLuminance(currentColor.code);
-    const labelColor = luminance > 0.65 ? "#1f2435" : "#ffffff";
-    const labelShadow =
-      luminance > 0.65 ? "0 0 4px rgba(255,255,255,0.35)" : "0 0 6px rgba(0,0,0,0.35)";
+    const labelColor = "#ffffff";
+    const labelShadow = "0 0 6px rgba(0,0,0,0.45)";
     penlightLabel.textContent = currentColor.name;
     penlightLabel.style.color = labelColor;
     penlightLabel.style.textShadow = labelShadow;
@@ -775,6 +867,21 @@ function updateUI(state) {
   }
 }
 
+function updateCountdownEffects(timeLeft) {
+  if (!hudTimerItem || !hudTime) return;
+  const isCountdown = Number.isFinite(timeLeft) && timeLeft <= 10 && timeLeft >= 0;
+  hudTimerItem.classList.toggle("is-countdown", isCountdown);
+  hudTime.classList.toggle("is-countdown", isCountdown);
+}
+
+function updatePauseButtonLabel(isPaused) {
+  if (!pauseButton) return;
+  const key = isPaused ? "play.resume" : "play.pause";
+  pauseButton.textContent = t(key);
+  pauseButton.setAttribute("aria-pressed", isPaused ? "true" : "false");
+  pauseButton.dataset.state = isPaused ? "resume" : "pause";
+}
+
 function populateResult(state) {
   resultScore.textContent = state.score;
   const levelInfo = getLevelInfoByScore(state.score);
@@ -789,7 +896,7 @@ function populateResult(state) {
 }
 
 function handleFeverSwing(e) {
-  if (!game.state.fever.active) return;
+  if (!game.state.fever.active || game.state.paused) return;
   if (e.type === "pointerdown") {
     if (e.currentTarget.setPointerCapture) {
       e.currentTarget.setPointerCapture(e.pointerId);
@@ -809,6 +916,15 @@ function handleFeverSwing(e) {
 }
 
 function showScreenPlay() {
+  resumeAudioContext();
+  if (hudTimerItem) {
+    hudTimerItem.classList.remove("is-countdown");
+  }
+  if (hudTime) {
+    hudTime.classList.remove("is-countdown");
+  }
+  lastCountdownTime = null;
+  screens.lockScroll();
   screens.showPlay();
   const selectedMode = document.querySelector('input[name="mode"]:checked').value;
   game.start(selectedMode);
@@ -915,6 +1031,98 @@ function showToast(message, variant = "success") {
   }, 1800);
 }
 
+function getOrCreateAudioContext() {
+  const AudioCtx = window.AudioContext || window.webkitAudioContext;
+  if (!AudioCtx) return null;
+  if (!audioContext) {
+    audioContext = new AudioCtx();
+  }
+  return audioContext;
+}
+
+function resumeAudioContext() {
+  const ctx = getOrCreateAudioContext();
+  if (!ctx) return;
+  if (ctx.state === "suspended") {
+    ctx.resume().catch((error) => {
+      console.warn("AudioContext resume failed:", error);
+    });
+  }
+}
+
+function getCountdownFrequency(timeLeft) {
+  if (timeLeft === 0) {
+    return 1046;
+  }
+  return 620 + (10 - timeLeft) * 32;
+}
+
+function playCountdownBeep(timeLeft) {
+  resumeAudioContext();
+  const ctx = getOrCreateAudioContext();
+  if (!ctx) return;
+  const now = ctx.currentTime + 0.01;
+  const oscillator = ctx.createOscillator();
+  const gain = ctx.createGain();
+  const isFinal = timeLeft === 0;
+  const duration = isFinal ? 1 : 0.25;
+  oscillator.type = "triangle";
+  oscillator.frequency.setValueAtTime(getCountdownFrequency(timeLeft), now);
+  gain.gain.setValueAtTime(0.0001, now);
+  gain.gain.exponentialRampToValueAtTime(isFinal ? 0.7 : 0.4, now + 0.05);
+  gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+  oscillator.connect(gain).connect(ctx.destination);
+  oscillator.start(now);
+  oscillator.stop(now + duration + 0.05);
+}
+
+function bindTapSafeActivation(button, action) {
+  if (!button || typeof action !== "function") return;
+  let skipNextClick = false;
+
+  const invoke = () => {
+    resumeAudioContext();
+    action();
+  };
+
+  if (window.PointerEvent) {
+    button.addEventListener(
+      "pointerdown",
+      (event) => {
+        if (event.pointerType === "touch" || event.pointerType === "pen") {
+          event.preventDefault();
+          skipNextClick = true;
+          invoke();
+        } else {
+          skipNextClick = false;
+        }
+      },
+      { passive: false }
+    );
+    button.addEventListener("pointercancel", () => {
+      skipNextClick = false;
+    });
+  } else {
+    button.addEventListener(
+      "touchstart",
+      (event) => {
+        event.preventDefault();
+        skipNextClick = true;
+        invoke();
+      },
+      { passive: false }
+    );
+  }
+
+  button.addEventListener("click", () => {
+    if (skipNextClick) {
+      skipNextClick = false;
+      return;
+    }
+    invoke();
+  });
+}
+
 function attachEventListeners() {
   document.getElementById("btn-start").addEventListener("click", showScreenPlay);
   document.getElementById("btn-end").addEventListener("click", endGame);
@@ -922,11 +1130,19 @@ function attachEventListeners() {
   document.getElementById("btn-top").addEventListener("click", () => screens.showTop());
   document.getElementById("btn-share").addEventListener("click", shareOnX);
 
-  document.getElementById("btn-left").addEventListener("click", () => game.rotate(-1));
-  document.getElementById("btn-right").addEventListener("click", () => game.rotate(1));
+  bindTapSafeActivation(document.getElementById("btn-left"), () => game.rotate(-1));
+  bindTapSafeActivation(document.getElementById("btn-right"), () => game.rotate(1));
+  if (pauseButton) {
+    bindTapSafeActivation(pauseButton, () => game.togglePause());
+  }
 
   document.addEventListener("keydown", (e) => {
     if (screens.play.hidden) return;
+    if (e.key === "Escape") {
+      game.togglePause();
+      return;
+    }
+    if (game.state.paused) return;
     if (e.key === "ArrowLeft") game.rotate(-1);
     if (e.key === "ArrowRight") game.rotate(1);
   });
