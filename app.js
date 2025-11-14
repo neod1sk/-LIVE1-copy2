@@ -133,17 +133,17 @@ const modeScore = {
 const translations = {
   ja: {
     "hero.title": "推しライト LIVE!!",
-    "hero.subtitle": "ペンライトを合わせて推しからレスをもらおう！",
+    "hero.subtitle": "ペンライトを合わせて推しのレスをつかめ!🔥",
     "top.start": "ゲームスタート",
     "top.howto": "操作説明",
     "top.ranking": "ランキングを見る（近日公開）",
     "settings.title": "難易度・設定",
-    "mode.easy.title": "Easy",
-    "mode.easy.desc": "＋6 点 / 成功。色順見本表示あり。",
-    "mode.normal.title": "Normal",
-    "mode.normal.desc": "＋10 点 / 成功。テンポ重視！",
-    "mode.hard.title": "Hard",
-    "mode.hard.desc": "＋13 点 / 成功。ボタン故障に注意！",
+    "mode.easy.title": "🔰EASY",
+    "mode.easy.desc": "+6点／色見本付き練習モード！",
+    "mode.normal.title": "⚡NORMAL",
+    "mode.normal.desc": "+10点／色順を覚えてガチ勝負！",
+    "mode.hard.title": "🔥HARD",
+    "mode.hard.desc": "+13点／ボタンの故障を乗り越え高得点を狙え！",
     "howto.title": "操作ガイド",
     "howto.step1": "スタート後、中央の「お題カラー」をチェック。",
     "howto.step2": "左右のボタンで順番にペンライトを回して一致させます。",
@@ -164,16 +164,16 @@ const translations = {
     "fever.title": "フィーバータイム！",
     "fever.message": "ペンライトをたくさん振って爆レスをもらおう！",
     "fever.swipe": "左右にスワイプ！",
-    "fever.timerUnit": "초",
+    "fever.timerUnit": "秒",
     "fever.countUnit": "往復",
     "fever.stage": "レス演出 Lv.{level}",
     "result.title": "ライブ結果",
     "result.scoreLabel": "トータルスコア",
-    "result.levelLabel": "オタクレベル",
+    "result.levelLabel": "オタレベル",
     "result.successLabel": "成功回数",
     "result.responsesLabel": "レス獲得数",
     "share.button": "Xでシェア",
-    "share.note": "※スクショを添付すると映えます！",
+    "share.note": "スクショを添えて、あなたの輝きを見せよう!✨",
     "history.title": "最近のスコア",
     "history.empty": "初プレイを記録しよう！",
     "history.pointsUnit": "点",
@@ -188,17 +188,17 @@ const translations = {
   },
   en: {
     "hero.title": "OshiLight LIVE!!",
-    "hero.subtitle": "Match the glow stick colors to earn your idol's response!",
+    "hero.subtitle": "Sync Your Light stick and Catch Your Oshi’s Reaction!🔥",
     "top.start": "Start Game",
     "top.howto": "How to Play",
     "top.ranking": "View Ranking (Coming Soon)",
     "settings.title": "Difficulty & Settings",
-    "mode.easy.title": "Easy",
-    "mode.easy.desc": "+6 pts per match. Color guide visible.",
-    "mode.normal.title": "Normal",
-    "mode.normal.desc": "+10 pts per match. Keep up the tempo!",
-    "mode.hard.title": "Hard",
-    "mode.hard.desc": "+13 pts per match. Beware of glitches!",
+    "mode.easy.title": "🔰EASY",
+    "mode.easy.desc": "+6 pts / Practice with color hints!",
+    "mode.normal.title": "⚡NORMAL",
+    "mode.normal.desc": "+10 pts / Remember the colors and challenge yourself!",
+    "mode.hard.title": "🔥HARD",
+    "mode.hard.desc": "+13 pts / Beat the glitches and hit the high score!",
     "howto.title": "How to Play",
     "howto.step1": "After starting, check the target color at the top.",
     "howto.step2": "Spin the penlight left/right to match the target color.",
@@ -228,7 +228,7 @@ const translations = {
     "result.successLabel": "Matches",
     "result.responsesLabel": "Responses",
     "share.button": "Share on X",
-    "share.note": "Attach a screenshot for extra sparkle!",
+    "share.note": "Add a screenshot to make it shine brighter!✨",
     "history.title": "Recent Scores",
     "history.empty": "Play once to record your first score!",
     "history.pointsUnit": "pts",
@@ -243,17 +243,17 @@ const translations = {
   },
   ko: {
     "hero.title": "오시 라이트 LIVE!!",
-    "hero.subtitle": "펜라이트 색을 맞춰서 오시에게서 레스를 받아보자!",
+    "hero.subtitle": "응원봉을 맞추고 오시의 레스를 잡아라!🔥",
     "top.start": "게임 시작",
     "top.howto": "조작 안내",
     "top.ranking": "랭킹 보기 (준비 중)",
     "settings.title": "난이도 · 설정",
-    "mode.easy.title": "Easy",
-    "mode.easy.desc": "+6점 / 성공. 색 가이드 표시.",
-    "mode.normal.title": "Normal",
-    "mode.normal.desc": "+10점 / 성공. 템포를 유지하세요!",
-    "mode.hard.title": "Hard",
-    "mode.hard.desc": "+13점 / 성공. 버튼 고장에 주의!",
+    "mode.easy.title": "🔰EASY",
+    "mode.easy.desc": "+6점 / 색상 예시가 있는 연습 모드!",
+    "mode.normal.title": "⚡NORMAL",
+    "mode.normal.desc": "+10점 / 색 순서를 외우고 진짜 승부!",
+    "mode.hard.title": "🔥HARD",
+    "mode.hard.desc": "+13점 / 버튼 오류를 뚫고 최고 점수 도전!",
     "howto.title": "플레이 방법",
     "howto.step1": "시작 후 상단의 목표 색을 확인하세요.",
     "howto.step2": "좌우 버튼으로 펜라이트를 돌려 색을 맞춥니다.",
@@ -274,16 +274,16 @@ const translations = {
     "fever.title": "피버 타임!",
     "fever.message": "펜라이트를 힘껏 흔들어서 폭렬 레스를 받아보자!",
     "fever.swipe": "좌우로 스와이프!",
-    "fever.timerUnit": "sec",
+    "fever.timerUnit": "초",
     "fever.countUnit": "회",
     "fever.stage": "레스 연출 Lv.{level}",
     "result.title": "라이브 결과",
     "result.scoreLabel": "토탈 스코어",
-    "result.levelLabel": "오타쿠 레벨",
+    "result.levelLabel": "오타 레벨",
     "result.successLabel": "성공 횟수",
-    "result.responsesLabel": "레스 획득 수",
+    "result.responsesLabel": "레스 획득수",
     "share.button": "X에 공유",
-    "share.note": "스크린샷을 첨부하면 더 돋보여요!",
+    "share.note": "스크린샷을 첨부하면 더 빛나요!✨",
     "history.title": "최근 스코어",
     "history.empty": "첫 플레이를 기록해보자!",
     "history.pointsUnit": "점",
@@ -592,8 +592,11 @@ class GameStore {
       };
     });
 
+    flashHudValues();
+    flashTargetCard();
+
     if (!this.state.fever.active) {
-      showToast(t("toast.match", { points }), "success");
+      showToast(t("toast.match", { points }), "success", { placement: "stage" });
     }
 
     const { fever, lastSuccessTimes, streak } = this.state;
@@ -712,6 +715,7 @@ const screens = {
     document.body.classList.remove("scroll-lock");
   },
   showTop() {
+    setHeroInteractive(false);
     this.unlockScroll();
     this.top.hidden = false;
     this.play.hidden = true;
@@ -724,6 +728,7 @@ const screens = {
     }
   },
   showPlay() {
+    resetViewportScroll(this.play);
     this.lockScroll();
     this.top.hidden = true;
     this.play.hidden = false;
@@ -736,6 +741,7 @@ const screens = {
     }
   },
   showResult(state) {
+    setHeroInteractive(true);
     this.unlockScroll();
     this.top.hidden = true;
     this.play.hidden = true;
@@ -770,11 +776,111 @@ const resultLevel = document.getElementById("result-level");
 const resultSuccess = document.getElementById("result-success");
 const resultResponses = document.getElementById("result-responses");
 const pauseButton = document.getElementById("btn-pause");
+const stageToastLayer = document.getElementById("stage-toast-layer");
+const hero = document.querySelector(".hero");
+const heroTitle = document.querySelector(".hero__title");
+const heroSubtitle = document.querySelector(".hero__subtitle");
+const heroInteractiveElements = [heroTitle, heroSubtitle];
+
+function resetViewportScroll(target) {
+  if (typeof window !== "undefined" && typeof window.scrollTo === "function") {
+    try {
+      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    } catch (error) {
+      window.scrollTo(0, 0);
+    }
+  }
+
+  if (!target) return;
+  try {
+    if (typeof target.scrollTo === "function") {
+      target.scrollTo({ top: 0, left: 0, behavior: "auto" });
+      return;
+    }
+  } catch (error) {
+    // ignore and fall through
+  }
+  target.scrollTop = 0;
+  target.scrollLeft = 0;
+}
 
 let lastSwingDirection = null;
 let previewItems = [];
 let lastCountdownTime = null;
 let audioContext = null;
+
+const isResultScreenActive = () => screens && screens.result && !screens.result.hidden;
+
+const handleHeroClick = () => {
+  if (!isResultScreenActive()) return;
+  screens.showTop();
+};
+
+const handleHeroKeydown = (event) => {
+  if (!isResultScreenActive()) return;
+  if (event.key === "Enter" || event.key === " ") {
+    event.preventDefault();
+    screens.showTop();
+  }
+};
+
+heroInteractiveElements.forEach((element) => {
+  if (!element) return;
+  element.addEventListener("click", handleHeroClick);
+  element.addEventListener("keydown", handleHeroKeydown);
+});
+
+function setHeroInteractive(enabled) {
+  if (!hero) return;
+  hero.classList.toggle("hero--interactive", enabled);
+  heroInteractiveElements.forEach((element) => {
+    if (!element) return;
+    if (enabled) {
+      element.setAttribute("role", "button");
+      element.setAttribute("tabindex", "0");
+    } else {
+      element.removeAttribute("role");
+      element.removeAttribute("tabindex");
+      if (document.activeElement === element) {
+        element.blur();
+      }
+    }
+  });
+}
+
+if (targetColor) {
+  targetColor.addEventListener(
+    "animationend",
+    (event) => {
+      if (event.animationName === "targetCardFlash") {
+        targetColor.classList.remove("color-card--flash");
+      }
+    },
+    { passive: true }
+  );
+}
+
+const hudFlashTargets = [
+  { element: hudScore, className: "hud__value--flash-score", animation: "hudValueFlashScore" },
+  {
+    element: hudSuccess,
+    className: "hud__value--flash-success",
+    animation: "hudValueFlashSuccess",
+  },
+];
+
+hudFlashTargets.forEach(({ element, className, animation }) => {
+  if (!element) return;
+  element.addEventListener(
+    "animationend",
+    (event) => {
+      if (event.animationName === animation) {
+        element.classList.remove(className);
+      }
+    },
+    { passive: true }
+  );
+});
 
 function initUI() {
   const reversedColors = [...colors].reverse();
@@ -865,6 +971,22 @@ function updateUI(state) {
   if (state.fever.active) {
     feverTime.textContent = state.fever.timeLeft;
   }
+}
+
+function flashTargetCard() {
+  if (!targetColor) return;
+  targetColor.classList.remove("color-card--flash");
+  void targetColor.offsetWidth;
+  targetColor.classList.add("color-card--flash");
+}
+
+function flashHudValues() {
+  hudFlashTargets.forEach(({ element, className }) => {
+    if (!element) return;
+    element.classList.remove(className);
+    void element.offsetWidth;
+    element.classList.add(className);
+  });
 }
 
 function updateCountdownEffects(timeLeft) {
@@ -971,11 +1093,18 @@ function restoreHistory() {
 function updateLangButtons() {
   if (!langButtons || !langButtons.length) return;
   langButtons.forEach((btn) => {
-    btn.classList.toggle(
-      "lang-switcher__btn--active",
-      btn.dataset.lang === currentLang
-    );
-    btn.setAttribute("aria-pressed", btn.dataset.lang === currentLang ? "true" : "false");
+    const isActive = btn.dataset.lang === currentLang;
+    btn.classList.toggle("lang-switcher__btn--active", isActive);
+    btn.setAttribute("aria-pressed", isActive ? "true" : "false");
+    const flag =
+      btn.dataset.lang === "ja"
+        ? "🇯🇵"
+        : btn.dataset.lang === "en"
+        ? "🇺🇸"
+        : btn.dataset.lang === "ko"
+        ? "🇰🇷"
+        : btn.textContent;
+    btn.textContent = flag;
   });
 }
 
@@ -1019,16 +1148,23 @@ function shareOnX() {
   window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, "_blank");
 }
 
-function showToast(message, variant = "success") {
+function showToast(message, variant = "success", options = {}) {
+  const { placement = "global", duration = 1800 } = options;
+  const container =
+    placement === "stage" && stageToastLayer ? stageToastLayer : document.body;
   const toast = document.createElement("div");
-  toast.className = `toast toast--${variant}`;
+  const extraClass = placement === "stage" ? " toast--stage" : "";
+  toast.className = `toast toast--${variant}${extraClass}`;
   toast.textContent = message;
-  document.body.appendChild(toast);
+  if (placement === "stage" && stageToastLayer) {
+    stageToastLayer.querySelectorAll(".toast").forEach((node) => node.remove());
+  }
+  container.appendChild(toast);
   requestAnimationFrame(() => toast.classList.add("is-visible"));
   setTimeout(() => {
     toast.classList.remove("is-visible");
     toast.addEventListener("transitionend", () => toast.remove(), { once: true });
-  }, 1800);
+  }, duration);
 }
 
 function getOrCreateAudioContext() {
@@ -1129,7 +1265,6 @@ function attachEventListeners() {
   document.getElementById("btn-retry").addEventListener("click", showScreenPlay);
   document.getElementById("btn-top").addEventListener("click", () => screens.showTop());
   document.getElementById("btn-share").addEventListener("click", shareOnX);
-
   bindTapSafeActivation(document.getElementById("btn-left"), () => game.rotate(-1));
   bindTapSafeActivation(document.getElementById("btn-right"), () => game.rotate(1));
   if (pauseButton) {
@@ -1216,6 +1351,24 @@ toastStyle.innerHTML = `
 .toast.is-visible {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
+}
+.toast--stage {
+  position: relative;
+  left: auto;
+  bottom: auto;
+  transform: translateY(12px);
+  padding: 8px 12px;
+  border-radius: 14px;
+  background: rgba(20, 9, 45, 0.92);
+  box-shadow: 0 12px 24px rgba(13, 5, 32, 0.4);
+  font-size: 0.8rem;
+  min-width: 120px;
+  opacity: 0;
+  white-space: nowrap;
+}
+.toast--stage.is-visible {
+  transform: translateY(0);
+  opacity: 1;
 }
 `;
 document.head.appendChild(toastStyle);
